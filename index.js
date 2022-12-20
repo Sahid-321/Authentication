@@ -16,12 +16,12 @@ const posts = [{
 }
 ]
 
-app.get("/",(req,res)=>{
-    res.json(posts)
+app.get("/", authenticationToken,(req,res)=>{
+    res.json(posts.filter(elem=> elem.username === req.user.name))
    
 })
 
-app.post("/login",(req,res)=>{
+app.post("/",(req,res)=>{
     const username = req.body.username;
     const user = {name:username}
    const accessToken =  jwt.sign(user, process.env.ACCESS_TOKEN)
@@ -29,6 +29,19 @@ res.json(accessToken)
   
 })
 
+function authenticationToken(req,res,next){
+    const authHeader = req.headers['authorization'];
+const token = authHeader && authHeader.split(' ')[1];
+if(token == null) return res.sendStatus(401);
+
+jwt.verify(token, process.env.ACCESS_TOKEN,(err,user)=>{
+    if(err) return res.sendStatus(403);
+req.user=user
+
+console.log(user);
+next()
+})
+}
 app.listen(PORT,()=>{
     console.log(`server runnign at ${PORT}`);
 })
