@@ -24,7 +24,7 @@ app.get("/",(req,res)=>{
 app.post("/login",(req,res)=>{
     const username = req.body.username;
     const user = {name:username}
-   const accessToken =  jwt.sign(user, "webtoken_by_sahid")
+   const accessToken =  jwt.sign(user, process.env.ACCESS_TOKEN)
 res.json(accessToken)
   
 })
