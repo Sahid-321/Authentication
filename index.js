@@ -3,9 +3,8 @@ const app = express();
 const PORT = 8080;
 const axios = require("axios")
 const bodyParser = require('body-parser'); 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.json());
 const posts = [{
     name: "sahid",
     mob:9005
@@ -21,8 +20,11 @@ app.get("/",(req,res)=>{
    
 })
 
-app.post("/",(req,res)=>{
-   console.log(req.body); 
+app.post("/login",(req,res)=>{
+    const username = req.body.username;
+    const user = {name:username}
+console.log(user);
+  
 })
 
 app.listen(PORT,()=>{
