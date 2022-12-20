@@ -3,7 +3,8 @@ const app = express();
 const PORT = 8080;
 const axios = require("axios")
 const bodyParser = require('body-parser'); 
-
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
 app.use(express.json());
 const posts = [{
     name: "sahid",
@@ -23,7 +24,8 @@ app.get("/",(req,res)=>{
 app.post("/login",(req,res)=>{
     const username = req.body.username;
     const user = {name:username}
-console.log(user);
+   const accessToken =  jwt.sign(user, "webtoken_by_sahid")
+res.json(accessToken)
   
 })
 
