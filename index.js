@@ -5,15 +5,20 @@ const axios = require("axios")
 const bodyParser = require('body-parser'); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const posts = [{
+    name: "sahid",
+    mob:9005
+},
+{
+    name: "jamal",
+    mob: 5009
+}
+]
+
 app.get("/",(req,res)=>{
-    res.send("server working")
-    axios.get(`https://jsonplaceholder.typicode.com/todos/`, { 
-        headers: { "Accept-Encoding": "gzip,deflate,compress" }} )
-    .then((result) =res.send(result)
-        
-    ).catch((err) => {
-        console.log(err);
-    });
+    res.json(posts)
+   
 })
 
 app.post("/",(req,res)=>{
