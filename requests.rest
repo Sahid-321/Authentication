@@ -1,5 +1,8 @@
- GET http://localhost:8080/
+GET  http://localhost:8080/
 
- ###
-
- POST http://localhost:8080/login
+###
+POST  http://localhost:8080/
+Content-Type: 'application/json'
+{
+    "username": "sahid"
+}
